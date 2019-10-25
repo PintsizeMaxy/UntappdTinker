@@ -8,6 +8,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search_breweries"
+            android:focusable="auto"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -12,7 +12,8 @@
         tools:layout="@layout/brewery_recycler">
         <action
             android:id="@+id/action_breweryFragment_to_breweryDetailFragment2"
-            app:destination="@id/breweryDetailFragment" />
+            app:destination="@id/breweryDetailFragment"
+            app:popUpTo="@+id/breweryFragment" />
     </fragment>
     <fragment
         android:id="@+id/breweryDetailFragment"
@@ -20,6 +21,6 @@
         android:label="BreweryDetailFragment"
         tools:layout="@layout/brewery_details_fragment">
         <argument android:name="brewery_details"
-            app:argType="string[]" />
+            app:argType="integer" />
     </fragment>
 </navigation>
