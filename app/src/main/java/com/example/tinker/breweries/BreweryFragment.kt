@@ -57,13 +57,9 @@ class BreweryFragment : Fragment() {
     }
 
     private fun navigateToDetails(v: View, item : BreweryItem) : Boolean {
-//        val extra = FragmentNavigatorExtras(
-//            brewery_logo to "brewery_logo",
-//            brewery_name to "brewery_name"
-//        )
+
         val action = BreweryFragmentDirections.actionBreweryFragmentToBreweryDetailFragment2(
             arrayOf(item.breweryName, item.breweryLabel))
-//        val extra = FragmentNavigator.Extras.Builder().addSharedElement(v.brewery_logo, ViewCompat.getTransitionName(v.brewery_logo)!!).build()
         findNavController().navigate(action)
         return false
     }
