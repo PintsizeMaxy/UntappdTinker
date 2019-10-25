@@ -63,8 +63,8 @@ class BreweryFragment : Fragment() {
 //        )
         val action = BreweryFragmentDirections.actionBreweryFragmentToBreweryDetailFragment2(
             arrayOf(item.breweryName, item.breweryLabel))
-        val extra = FragmentNavigator.Extras.Builder().addSharedElement(v.brewery_logo, ViewCompat.getTransitionName(v.brewery_logo)!!).build()
-        findNavController().navigate(action, extra)
+//        val extra = FragmentNavigator.Extras.Builder().addSharedElement(v.brewery_logo, ViewCompat.getTransitionName(v.brewery_logo)!!).build()
+        findNavController().navigate(action)
         return false
     }
 }

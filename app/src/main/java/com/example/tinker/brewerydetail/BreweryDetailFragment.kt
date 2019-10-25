@@ -28,8 +28,8 @@ class BreweryDetailFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-//        binding.breweryLogo.load(args.breweryDetails[1])
+//        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        binding.breweryLogo.load(args.breweryDetails[1])
         binding.breweryName.text = args.breweryDetails[0]
     }
 }
