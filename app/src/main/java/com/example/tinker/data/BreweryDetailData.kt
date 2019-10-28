@@ -11,5 +11,9 @@ data class BreweryDetailData(
     @SerializedName("beer_count")
     val beerCount: Int,
     @SerializedName("brewery_type")
-    val breweryType: String
+    val breweryType: String,
+    @SerializedName("brewery_description")
+    val breweryDescription: String,
+    @SerializedName("location")
+    val location: BreweryLocation
 )

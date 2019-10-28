@@ -50,6 +50,8 @@ class BreweryDetailFragment : Fragment() {
                     breweryName.text = it.response.brewery.breweryName
                     type.text = it.response.brewery.breweryType
                     count.text = String.format("%d beers", it.response.brewery.beerCount)
+                    address.text = String.format("%s %s, %s", it.response.brewery.location.breweryAddress, it.response.brewery.location.breweryCity, it.response.brewery.location.breweryState)
+                    description.text = it.response.brewery.breweryDescription
                 }
                 }
         })

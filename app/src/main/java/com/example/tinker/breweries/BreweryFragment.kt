@@ -46,23 +46,12 @@ class BreweryFragment : Fragment() {
             }
         })
         fastAdapter.onClickListener = { _, _, item, _ ->
-//            binding.searchBreweries.clearFocus()
             navigateToDetails(item)
         }
 
-        view.setOnTouchListener { _, _ ->
-            binding.searchBreweries.clearFocus()
-            itemAdapter.clear()
-            viewModel.searchBreweries(binding.searchBreweries.text.toString())
-            true
-        }
-//        binding.searchBreweries.doOnTextChanged { text, _, _, _ ->
-//            itemAdapter.clear()
-//            viewModel.searchBreweries(text.toString())
-//        }
         binding.searchBreweries.doAfterTextChanged {
             itemAdapter.clear()
-
+            viewModel.searchBreweries(it.toString())
         }
     }
 
