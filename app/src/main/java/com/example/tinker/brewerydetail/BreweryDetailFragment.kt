@@ -5,6 +5,7 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -59,6 +60,7 @@ class BreweryDetailFragment : Fragment() {
                     breweryName.text = it.response.brewery.breweryName
                     type.text = it.response.brewery.breweryType
                     count.text = String.format("%d beers", it.response.brewery.beerCount)
+                    address.isVisible = it.response.brewery.location.breweryCity.isNotEmpty()
                     address.text = String.format(
                         "%s %s, %s",
                         it.response.brewery.location.breweryAddress,
