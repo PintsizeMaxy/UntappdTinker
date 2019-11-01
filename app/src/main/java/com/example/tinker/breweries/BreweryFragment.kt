@@ -2,6 +2,8 @@ package com.example.tinker.breweries
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -34,8 +36,9 @@ class BreweryFragment : Fragment() {
         val itemAdapter = ItemAdapter<BreweryItem>()
         val fastAdapter = FastAdapter.with(itemAdapter)
         viewModel.viewState.observe(this, Observer { state ->
+            itemAdapter.clear()
             val items = ArrayList<BreweryItem>()
-            for(item in state.response.brewery.items){
+            for (item in state.response.brewery.items) {
                 items.add(item.brewery)
             }
             binding.listRecycler.apply {
@@ -48,19 +51,28 @@ class BreweryFragment : Fragment() {
         fastAdapter.onClickListener = { _, _, item, _ ->
             navigateToDetails(item)
         }
-
-        binding.searchBreweries.doAfterTextChanged {
-            itemAdapter.clear()
-            viewModel.searchBreweries(it.toString())
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.options_menu, menu)
+        val searchItem = menu.findItem(R.id.search).actionView as SearchView
+        searchItem.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchItem.clearFocus()
+                searchItem.setQuery(query, false)
+                viewModel.searchBreweries(query.toString())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
-    private fun navigateToDetails(item : BreweryItem) : Boolean {
-        val action = BreweryFragmentDirections.actionBreweryFragmentToBreweryDetailFragment2(item.breweryId)
+
+    private fun navigateToDetails(item: BreweryItem): Boolean {
+        val action =
+            BreweryFragmentDirections.actionBreweryFragmentToBreweryDetailFragment2(item.breweryId)
         findNavController().navigate(action)
         return false
     }
