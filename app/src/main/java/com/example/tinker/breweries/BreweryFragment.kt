@@ -38,9 +38,7 @@ class BreweryFragment : Fragment() {
         viewModel.viewState.observe(this, Observer { state ->
             itemAdapter.clear()
             val items = ArrayList<BreweryItem>()
-            for (item in state.response.brewery.items) {
-                items.add(item.brewery)
-            }
+            state.response.brewery.items.forEach { items.add(it.brewery) }
             binding.listRecycler.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)

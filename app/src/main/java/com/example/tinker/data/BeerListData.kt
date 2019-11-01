@@ -2,8 +2,8 @@ package com.example.tinker.data
 
 import com.google.gson.annotations.SerializedName
 
-data class BreweryCountData(
+data class BeerListData (
 
     @SerializedName("items")
-    val items: List<BreweryData>
+    val items: List<BeerItemData>
 )
