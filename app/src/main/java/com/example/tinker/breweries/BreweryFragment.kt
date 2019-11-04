@@ -37,13 +37,11 @@ class BreweryFragment : Fragment() {
         val fastAdapter = FastAdapter.with(itemAdapter)
         viewModel.viewState.observe(this, Observer { state ->
             itemAdapter.clear()
-            val items = ArrayList<BreweryItem>()
-            state.response.brewery.items.forEach { items.add(it.brewery) }
             binding.listRecycler.apply {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = fastAdapter
-                itemAdapter.add(items)
+                itemAdapter.add(state.response.brewery.items.map { it.brewery })
             }
         })
         fastAdapter.onClickListener = { _, _, item, _ ->

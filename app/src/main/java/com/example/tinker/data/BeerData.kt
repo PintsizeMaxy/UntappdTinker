@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class BeerData (
 
     @SerializedName("bid")
-    val bid: Double,
+    val bid: Int,
     @SerializedName("beer_name")
     val beerName: String,
     @SerializedName("beer_label")

@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.get
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.api.load
@@ -52,36 +54,33 @@ class BreweryDetailFragment : Fragment() {
         val itemAdapter = ItemAdapter<BeerItemView>()
         val fastAdapter = FastAdapter.with(itemAdapter)
         viewModel.viewState.observe(this, Observer { state ->
-            state?.let {
+            state?.response?.brewery?.let {
                 with(binding) {
-                    breweryLogo.load(it.response.brewery.breweryLabel) {
+                    breweryLogo.load(it.breweryLabel) {
                         placeholder(R.drawable.ic_photo)
                     }
-                    breweryName.text = it.response.brewery.breweryName
-                    type.text = it.response.brewery.breweryType
-                    count.text = String.format("%d beers", it.response.brewery.beerCount)
-                    address.isVisible = it.response.brewery.location.breweryCity.isNotEmpty()
+                    breweryName.text = it.breweryName
+                    type.text = it.breweryType
+                    count.text = String.format("%d beers", it.beerCount)
+                    address.isVisible = it.location.breweryCity.isNotEmpty()
                     address.text = String.format(
                         "%s %s, %s",
-                        it.response.brewery.location.breweryAddress,
-                        it.response.brewery.location.breweryCity,
-                        it.response.brewery.location.breweryState
+                        it.location.breweryAddress,
+                        it.location.breweryCity,
+                        it.location.breweryState
                     )
 
-                    if (it.response.brewery.breweryDescription.isEmpty()) descriptionBrewery.visibility = View.GONE
-                    else description.text = it.response.brewery.breweryDescription
-                    val beerItems = ArrayList<BeerItemView>()
-                    it.response.brewery.beerList.items.forEach { beerItems.add(BeerItemView(it.beer)) }
+                    if (it.breweryDescription.isEmpty()) descriptionBrewery.visibility = View.GONE
+                    else description.text = it.breweryDescription
                     binding.beerRecycler.apply {
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
                         adapter = fastAdapter
-                        itemAdapter.add(beerItems)
+                        itemAdapter.add(it.beerList.items.map { BeerItemView(it.beer) })
                     }
-//                    fastAdapter.onClickListener = { _, _, item, _ ->
-//                        item.model.
-//                        false
-//                    }
+                    fastAdapter.onClickListener = { _, _, item, _ ->
+                        navigateToBeerDetail(item.model.bid)
+                    }
                 }
             }
         })
@@ -101,7 +100,9 @@ class BreweryDetailFragment : Fragment() {
         }
     }
 
-    private fun navigateToBeerDetail() : Boolean {
+    private fun navigateToBeerDetail(bid: Int) : Boolean {
+        val actions = BreweryDetailFragmentDirections.toBeer(bid)
+        findNavController().navigate(actions)
         return false
     }
 }

@@ -1,6 +1,7 @@
 package com.example.tinker.brewerydetail
 
 import android.view.View
+import coil.api.clear
 import coil.api.load
 import com.example.tinker.ItemView
 import com.example.tinker.R
@@ -28,7 +29,7 @@ class BeerItemView(private val beer: BeerData) : ItemView(beer) {
 
     override fun unbindView(holder: ViewHolder) {
         super.unbindView(holder)
-        holder.itemView.beer_label.load(R.drawable.ic_photo)
+        holder.itemView.beer_label.clear()
         holder.itemView.beer_name.text = null
         holder.itemView.beer_style.text = null
         holder.itemView.beer_rating.text = null

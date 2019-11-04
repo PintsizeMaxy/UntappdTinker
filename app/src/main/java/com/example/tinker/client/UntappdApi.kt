@@ -1,5 +1,6 @@
 package com.example.tinker.client
 
+import com.example.tinker.data.UntappdBeerData
 import com.example.tinker.data.UntappdData
 import com.example.tinker.data.UntappdDetailData
 import retrofit2.Retrofit
@@ -14,6 +15,9 @@ interface UntappdApi {
 
     @GET("search/brewery")
     suspend fun searchBrewery(@Query("q") q: String, @Query("client_id") client_id: String, @Query("client_secret") client_secret: String) : UntappdData
+
+    @GET("beer/info/{BID}")
+    suspend fun getBeer(@Path("BID") BID: Int, @Query("client_id") client_id: String, @Query("client_secret") client_secret: String, @Query("compact") compact: Boolean = true) : UntappdBeerData
 
     companion object{
         val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.untappd.com/v4/")

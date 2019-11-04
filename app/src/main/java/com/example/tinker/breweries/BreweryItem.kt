@@ -3,6 +3,7 @@ package com.example.tinker.breweries
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import coil.api.clear
 import coil.api.load
 import com.example.tinker.R
 import com.google.gson.annotations.SerializedName
@@ -37,6 +38,7 @@ class BreweryItem : AbstractItem<BreweryItem.ViewHolder>() {
 
         override fun unbindView(item: BreweryItem) {
             name.text = null
+            image.clear()
         }
 
     }
