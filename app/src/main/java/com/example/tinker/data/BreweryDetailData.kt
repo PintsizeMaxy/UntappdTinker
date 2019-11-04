@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class BreweryDetailData(
 
+    @SerializedName("bid")
+    val bid: Int,
     @SerializedName("brewery_name")
     val breweryName: String,
     @SerializedName("brewery_label")

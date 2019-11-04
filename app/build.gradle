@@ -19,6 +19,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_ID", Untappd_Id
+            buildConfigField "String", "API_SECRET", Untappd_Secret
+        }
+        debug{
+            buildConfigField "String", "API_ID", Untappd_Id
+            buildConfigField "String", "API_SECRET", Untappd_Secret
         }
     }
     dataBinding {

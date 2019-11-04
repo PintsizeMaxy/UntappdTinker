@@ -4,10 +4,11 @@ import android.view.View
 import coil.api.load
 import com.example.tinker.ItemView
 import com.example.tinker.R
+import com.example.tinker.data.BeerData
 import com.example.tinker.data.BeerItemData
 import kotlinx.android.synthetic.main.beer_item.view.*
 
-class BeerItemView(private val beer: BeerItemData) : ItemView(beer) {
+class BeerItemView(private val beer: BeerData) : ItemView(beer) {
     override val layoutRes = R.layout.beer_item
     override val type = R.id.beer_item
 
@@ -16,12 +17,12 @@ class BeerItemView(private val beer: BeerItemData) : ItemView(beer) {
     override fun bindView(holder: ViewHolder, payloads: MutableList<Any>) {
         super.bindView(holder, payloads)
         with(beer){
-            holder.itemView.beer_label.load(beer.beerLabel){
+            holder.itemView.beer_label.load(beerLabel){
                 placeholder(R.drawable.ic_photo)
             }
-            holder.itemView.beer_name.text = beer.beerName
-            holder.itemView.beer_style.text = beer.beerStyle
-            holder.itemView.beer_rating.text = beer.ratingScore.toString()
+            holder.itemView.beer_name.text = beerName
+            holder.itemView.beer_style.text = beerStyle
+            holder.itemView.beer_rating.text = ratingScore.toString()
         }
     }
 

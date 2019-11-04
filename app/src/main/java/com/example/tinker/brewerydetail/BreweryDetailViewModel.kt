@@ -3,6 +3,7 @@ package com.example.tinker.brewerydetail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tinker.BuildConfig
 import com.example.tinker.client.UntappdApi
 import com.example.tinker.data.UntappdDetailData
 import kotlinx.coroutines.Job
@@ -27,8 +28,8 @@ class BreweryDetailViewModel(brewery: Int) : ViewModel() {
                 val apiResult = viewModelScope.async {
                     UntappdApi.service.getBrewery(
                         id,
-                        UntappdApi.clientId,
-                        UntappdApi.clientSecret)
+                        BuildConfig.API_ID,
+                        BuildConfig.API_SECRET)
                 }
                 viewState.postValue(
                     apiResult.await()

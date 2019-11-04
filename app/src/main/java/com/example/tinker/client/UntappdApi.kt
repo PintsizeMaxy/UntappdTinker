@@ -16,8 +16,6 @@ interface UntappdApi {
     suspend fun searchBrewery(@Query("q") q: String, @Query("client_id") client_id: String, @Query("client_secret") client_secret: String) : UntappdData
 
     companion object{
-        val clientId = "9016D72981246903CAB5DFB42948481B021D651B"
-        val clientSecret = "49F57F65DEAD891D8BDB3E5B95615509AB9ECC19"
         val retrofit : Retrofit = Retrofit.Builder().baseUrl("https://api.untappd.com/v4/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service : UntappdApi = retrofit.create<UntappdApi>(UntappdApi::class.java)

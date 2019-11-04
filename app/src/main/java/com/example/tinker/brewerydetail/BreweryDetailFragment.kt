@@ -71,13 +71,17 @@ class BreweryDetailFragment : Fragment() {
                     if (it.response.brewery.breweryDescription.isEmpty()) descriptionBrewery.visibility = View.GONE
                     else description.text = it.response.brewery.breweryDescription
                     val beerItems = ArrayList<BeerItemView>()
-                    it.response.brewery.beerList.items.forEach { beerItems.add(BeerItemView(it)) }
+                    it.response.brewery.beerList.items.forEach { beerItems.add(BeerItemView(it.beer)) }
                     binding.beerRecycler.apply {
                         layoutManager = LinearLayoutManager(context)
                         setHasFixedSize(true)
                         adapter = fastAdapter
                         itemAdapter.add(beerItems)
                     }
+//                    fastAdapter.onClickListener = { _, _, item, _ ->
+//                        item.model.
+//                        false
+//                    }
                 }
             }
         })
@@ -95,5 +99,9 @@ class BreweryDetailFragment : Fragment() {
             }
             it.layoutParams = params
         }
+    }
+
+    private fun navigateToBeerDetail() : Boolean {
+        return false
     }
 }
